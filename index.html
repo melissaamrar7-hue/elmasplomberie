@@ -193,11 +193,10 @@ p{margin:0}
 .methode{background:var(--encre);color:var(--papier)}
 .methode .tete p{color:rgba(242,237,228,.7)}
 .etapes{display:grid;grid-template-columns:repeat(3,1fr);gap:0 36px}
-.etape .chiffre{display:block;font:800 clamp(4.5rem,8vw,7rem)/1 var(--display);letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px var(--cuivre);margin-bottom:24px}
 .etape .corps{position:relative;border-top:2px solid rgba(242,237,228,.16);padding-top:30px}
 .etape .corps::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--cuivre)}
-.etape h3{font-size:1.65rem;margin-bottom:14px}
-.etape p{color:rgba(242,237,228,.7);max-width:24em}
+.etape h3{font-size:1.5rem;margin-bottom:12px}
+.etape p{color:rgba(242,237,228,.75);max-width:26em}
 
 /* Forfaits */
 .forfaits-grille{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch;padding-top:16px}
@@ -597,15 +596,15 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
   <div class="wrap">
     <div class="tete reveal">
       <div>
-        <span class="etiquette">Comment ça se passe</span>
-        <h2 id="t-methode">Pas de surprise<br>sur la facture.</h2>
+        <span class="etiquette">Déroulement</span>
+        <h2 id="t-methode">Comment se passe une intervention</h2>
       </div>
-      <p>Trois étapes, toujours les mêmes. Vous savez ce qui va être fait et combien ça coûte avant qu'on touche à quoi que ce soit.</p>
+      <p>Pour une petite fuite comme pour un chantier de plusieurs jours, on travaille de la même façon. Le prix est toujours donné avant de commencer.</p>
     </div>
     <div class="etapes">
-      <div class="etape reveal"><span class="chiffre">01</span><div class="corps"><h3>Vous appelez</h3><p>On décroche, on vous écoute et on vous donne une heure d'arrivée réaliste. Pas une demi-journée d'attente.</p></div></div>
-      <div class="etape reveal"><span class="chiffre">02</span><div class="corps"><h3>On diagnostique</h3><p>Sur place, on vous explique le problème et on annonce le prix. Si une réparation suffit, on ne vous vend pas un remplacement.</p></div></div>
-      <div class="etape reveal"><span class="chiffre">03</span><div class="corps"><h3>On répare, on range</h3><p>Sols protégés, travail soigné, et on nettoie le chantier avant de partir. Vous payez ce qui était prévu, rien de plus.</p></div></div>
+      <div class="etape reveal"><div class="corps"><h3>Au téléphone</h3><p>Vous nous expliquez le problème, et si possible vous nous envoyez une photo sur WhatsApp. On vous dit si c'est urgent et à quelle heure on peut passer.</p></div></div>
+      <div class="etape reveal"><div class="corps"><h3>Sur place</h3><p>On cherche d'où vient le problème et on vous donne le prix avant de toucher à quoi que ce soit. Si une réparation suffit, on ne vous propose pas de tout changer.</p></div></div>
+      <div class="etape reveal"><div class="corps"><h3>Après l'intervention</h3><p>On protège le sol pendant le travail et on nettoie avant de partir. Vous recevez une facture détaillée, au prix qui avait été annoncé.</p></div></div>
     </div>
   </div>
 </section>
