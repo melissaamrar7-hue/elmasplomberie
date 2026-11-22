@@ -175,17 +175,21 @@ p{margin:0}
 .tete p{color:var(--encre-2);font-size:1.05rem;max-width:30em;justify-self:end}
 
 /* Services : liste éditoriale */
+.services-corps{display:grid;grid-template-columns:.75fr 1.25fr;gap:clamp(36px,5vw,80px);align-items:start}
+.services-photo{position:sticky;top:110px;margin:0}
+.services-photo .cadre{border-radius:12px;overflow:hidden;aspect-ratio:3/4;background:var(--papier-2)}
+.services-photo img{width:100%;height:100%;object-fit:cover}
+.services-photo figcaption{font:600 1.45rem/1.2 var(--main);color:var(--cuivre-f);margin-top:14px;rotate:-1.5deg}
 .liste{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--ligne)}
-.liste li{border-top:1px solid var(--ligne)}
-.liste a{display:grid;grid-template-columns:minmax(220px,1fr) 1.7fr;gap:12px 40px;align-items:baseline;padding:28px 0;text-decoration:none}
-.liste .num{font-size:.9rem;font-weight:600;color:var(--cuivre)}
-.liste h3{font-size:clamp(1.5rem,2.6vw,2.25rem);letter-spacing:-.03em}
+.liste > li{border-top:1px solid var(--ligne);padding:28px 0 30px}
+.srv-tete{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:10px}
+.liste h3{font-size:clamp(1.45rem,2.3vw,1.95rem);letter-spacing:-.03em}
+.srv-devis{flex:none;font-weight:600;font-size:.9rem;text-decoration:none;color:var(--encre);border-bottom:1.5px solid var(--cuivre);padding-bottom:2px;white-space:nowrap}
+.srv-devis:hover{color:var(--cuivre)}
 .liste p{color:var(--encre-2);font-size:1rem;max-width:40em}
-.liste h3{transition:color .2s}
-.liste a:hover h3{color:var(--cuivre)}
-.liste .fleche{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ligne);display:grid;place-items:center;justify-self:end;transition:background .35s,border-color .35s,color .35s,transform .35s}
-.liste .fleche svg{width:20px;height:20px}
-.liste a:hover .fleche{background:var(--cuivre);border-color:var(--cuivre);color:#fff;transform:rotate(-45deg)}
+.srv-cas{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.srv-cas li{font-size:.84rem;font-weight:500;padding:6px 12px;border-radius:999px;background:#FBF8F2;border:1px solid var(--ligne);color:var(--encre)}
+@media (max-width:980px){.services-corps{grid-template-columns:1fr}.services-photo{display:none}}
 
 /* Méthode */
 .methode{background:var(--encre);color:var(--papier)}
@@ -433,7 +437,6 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
 }
 @media (max-width:640px){
   .bandeau-haut .masquer{display:none}
-  .liste a{grid-template-columns:1fr;gap:8px;padding:22px 0}
   .galerie{grid-template-columns:1fr}
   .galerie .g1{grid-row:auto;min-height:0;aspect-ratio:4/5}
   .macaron{width:118px;height:118px;left:-6px;bottom:24px}
@@ -550,14 +553,44 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
       </div>
       <p>On intervient chez les particuliers comme chez les pros, partout en Île-de-France. C'est nous qui venons sur chaque chantier, on ne sous-traite pas.</p>
     </div>
-    <ol class="liste">
-      <li><a href="#contact"><h3>Dépannage &amp; urgences</h3><p>Une fuite, un dégât des eaux, un tuyau qui a lâché ? Appelez-nous, on se déplace rapidement, y compris le week-end.</p></a></li>
-      <li><a href="#contact"><h3>Recherche de fuite</h3><p>Tache au plafond, compteur qui tourne tout seul, facture d'eau qui grimpe… On trouve d'où ça vient en cassant le moins possible, et on vous fait un rapport pour l'assurance.</p></a></li>
-      <li><a href="#contact"><h3>Débouchage</h3><p>Évier, douche, WC ou colonne d'immeuble. On débouche, et on vous explique ce qui a causé le bouchon pour éviter que ça recommence.</p></a></li>
-      <li><a href="#contact"><h3>Chauffe-eau</h3><p>Plus d'eau chaude, ballon qui fuit ou qui fait du bruit. On le répare quand c'est possible, sinon on le remplace par un modèle électrique ou thermodynamique.</p></a></li>
-      <li><a href="#contact"><h3>Salle de bain &amp; cuisine</h3><p>Douche à l'italienne, meuble vasque, évier, lave-vaisselle. On refait toute la plomberie avant la pose, pour que ce qui est caché derrière les murs soit aussi propre que le reste.</p></a></li>
-      <li><a href="#contact"><h3>WC &amp; sanitaires</h3><p>Chasse d'eau qui coule sans arrêt, robinet qui goutte, WC à changer ou à suspendre. Ce sont souvent des petites interventions, qu'on règle dans la journée.</p></a></li>
-    </ol>
+    <div class="services-corps">
+      <figure class="services-photo reveal">
+        <div class="cadre"><img id="services-img" alt="Salle de bain sous combles refaite par Elmas Plomberie" loading="lazy"></div>
+        <figcaption>Un de nos derniers chantiers, pas une photo de catalogue.</figcaption>
+      </figure>
+      <ol class="liste">
+      <li>
+        <div class="srv-tete"><h3>Dépannage &amp; urgences</h3><a class="srv-devis" href="#devis" data-devis-type="Fuite / dépannage">Demander un devis</a></div>
+        <p>Une fuite, un dégât des eaux, un tuyau qui a lâché ? Appelez-nous, on se déplace rapidement, y compris le week-end.</p>
+        <ul class="srv-cas"><li>Fuite sous l'évier</li><li>Tuyau percé</li><li>Dégât des eaux</li><li>Robinet d'arrêt bloqué</li></ul>
+      </li>
+      <li>
+        <div class="srv-tete"><h3>Recherche de fuite</h3><a class="srv-devis" href="#devis" data-devis-type="Fuite / dépannage">Demander un devis</a></div>
+        <p>On trouve d'où vient l'eau en cassant le moins possible, et on vous remet un rapport pour l'assurance.</p>
+        <ul class="srv-cas"><li>Tache au plafond</li><li>Compteur qui tourne</li><li>Facture d'eau qui grimpe</li><li>Infiltration chez le voisin</li></ul>
+      </li>
+      <li>
+        <div class="srv-tete"><h3>Débouchage</h3><a class="srv-devis" href="#devis" data-devis-type="Débouchage">Demander un devis</a></div>
+        <p>On débouche, et on vous explique ce qui a causé le bouchon pour éviter que ça recommence.</p>
+        <ul class="srv-cas"><li>Évier bouché</li><li>WC bouché</li><li>Douche qui s'écoule mal</li><li>Mauvaises odeurs</li><li>Colonne d'immeuble</li></ul>
+      </li>
+      <li>
+        <div class="srv-tete"><h3>Chauffe-eau</h3><a class="srv-devis" href="#devis" data-devis-type="Chauffe-eau">Demander un devis</a></div>
+        <p>On le répare quand c'est possible. Sinon, on le remplace par un modèle électrique ou thermodynamique.</p>
+        <ul class="srv-cas"><li>Plus d'eau chaude</li><li>Ballon qui fuit</li><li>Groupe de sécurité</li><li>Ballon qui fait du bruit</li></ul>
+      </li>
+      <li>
+        <div class="srv-tete"><h3>Salle de bain &amp; cuisine</h3><a class="srv-devis" href="#devis" data-devis-type="Salle de bain">Demander un devis</a></div>
+        <p>On refait toute la plomberie avant la pose, pour que ce qui est caché derrière les murs soit aussi propre que le reste.</p>
+        <ul class="srv-cas"><li>Douche à l'italienne</li><li>Meuble vasque</li><li>Évier et lave-vaisselle</li><li>Rénovation complète</li></ul>
+      </li>
+      <li>
+        <div class="srv-tete"><h3>WC &amp; sanitaires</h3><a class="srv-devis" href="#devis" data-devis-type="WC &amp; sanitaires">Demander un devis</a></div>
+        <p>Souvent de petites interventions, qu'on règle dans la journée.</p>
+        <ul class="srv-cas"><li>Chasse d'eau qui coule</li><li>Robinet qui goutte</li><li>WC suspendu</li><li>Mécanisme à changer</li></ul>
+      </li>
+      </ol>
+    </div>
   </div>
 </section>
 
@@ -1070,6 +1103,11 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
         .finally(function(){ bouton.disabled = false; bouton.textContent = 'Envoyer ma demande'; });
     });
   }
+
+  // Photo de la section services : reprend la 1re photo « après » des réalisations
+  var imgServices = document.getElementById('services-img');
+  var source = document.querySelector('.renov-galerie img');
+  if (imgServices && source && !imgServices.getAttribute('src')) imgServices.src = source.src;
 
   // Ouvre le bon volet des mentions légales quand on y arrive par un lien
   function ouvrirVolet(){
