@@ -232,23 +232,15 @@ p{margin:0}
 /* Professionnels */
 .pros{background:var(--encre);color:var(--papier)}
 .pros .tete p{color:rgba(242,237,228,.7)}
-.pros-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(36px,5vw,72px);align-items:start}
-.pros-liste{list-style:none;margin:0;padding:0}
-.pros-liste li{display:grid;grid-template-columns:56px 1fr;gap:22px;padding:28px 0;border-top:1px solid rgba(242,237,228,.14)}
-.pros-liste li:last-child{border-bottom:1px solid rgba(242,237,228,.14)}
-.pros-liste .ico{width:52px;height:52px;border-radius:14px;border:1.5px solid rgba(232,180,140,.4);display:grid;place-items:center;color:var(--cuivre-clair)}
-.pros-liste .ico svg{width:24px;height:24px}
-.pros-liste h3{font-size:clamp(1.35rem,2.2vw,1.65rem);letter-spacing:-.025em;margin-bottom:8px}
-.pros-liste p{color:rgba(242,237,228,.7);font-size:.97rem;max-width:36em}
-.pros-carte{position:sticky;top:110px;background:var(--papier);color:var(--encre);border-radius:14px;padding:34px 32px;box-shadow:0 30px 60px rgba(0,0,0,.25)}
-.pros-carte h3{font-size:clamp(1.5rem,2.4vw,1.9rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:16px 0 24px}
-.pros-carte ul{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:13px}
-.pros-carte li{display:flex;gap:10px;font-size:.95rem}
-.pros-carte li::before{content:"✓";color:var(--cuivre);font-weight:700;flex:none}
-.pros-carte .btn{width:100%}
-.pros-carte .btn + .btn{margin-top:10px}
-@media (max-width:980px){.pros-grid{grid-template-columns:1fr}.pros-carte{position:static}}
-@media (max-width:640px){.pros-liste li{grid-template-columns:44px 1fr;gap:16px}.pros-liste .ico{width:44px;height:44px}.pros-carte{padding:28px 22px}}
+.pros-tableau{margin:0;border-bottom:1px solid rgba(242,237,228,.14)}
+.pros-tableau > div{display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:8px 40px;padding:24px 0;border-top:1px solid rgba(242,237,228,.14)}
+.pros-tableau dt{font:700 1.25rem/1.25 var(--display);letter-spacing:-.02em}
+.pros-tableau dd{margin:0;color:rgba(242,237,228,.75);max-width:42em}
+.pros-contrat{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:1.3fr auto;gap:28px 48px;align-items:center;background:var(--papier);color:var(--encre);border-radius:14px;padding:clamp(26px,3.5vw,40px)}
+.pros-contrat h3{font-size:clamp(1.4rem,2.2vw,1.8rem);font-weight:800;letter-spacing:-.03em;margin-bottom:10px}
+.pros-contrat p{color:var(--encre-2);max-width:40em}
+.pros-actions{display:flex;flex-direction:column;gap:10px}
+@media (max-width:860px){.pros-tableau > div{grid-template-columns:1fr}.pros-contrat{grid-template-columns:1fr}.pros-actions{flex-direction:row;flex-wrap:wrap}}
 
 /* Rénovations avant / après */
 .renov{background:var(--encre);color:var(--papier)}
@@ -685,44 +677,25 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
         <span class="etiquette">Professionnels</span>
         <h2 id="t-pros">Une offre dédiée<br>aux professionnels</h2>
       </div>
-      <p>Syndics, gestionnaires, commerces et hôtels&nbsp;: nous assurons la maintenance et le dépannage de vos immeubles et de vos locaux. Interventions planifiées ou en urgence, devis et factures établis au nom de votre structure.</p>
+      <p>Nous travaillons avec des syndics, des agences immobilières, des commerces et des hôtels. Les devis et les factures sont établis au nom de votre structure, et un rapport vous est transmis après chaque intervention.</p>
     </div>
-    <div class="pros-grid">
-      <ul class="pros-liste">
-        <li class="reveal">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M10.5 21v-3h3v3"/></svg></span>
-          <div><h3>Syndics &amp; copropriétés</h3><p>Parties communes, colonnes montantes, recherche de fuite et dégâts des eaux entre lots. Rapport fourni pour le conseil syndical et les assurances.</p></div>
-        </li>
-        <li class="reveal">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l2 2M15 8l2 2"/></svg></span>
-          <div><h3>Gestionnaires &amp; agences</h3><p>Dépannages dans les logements que vous gérez, remises en état entre deux locataires, devis rapides à transmettre aux propriétaires.</p></div>
-        </li>
-        <li class="reveal">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8a2 2 0 0 0 4 0V3M9 11v10M17 3c-1.7 1.3-2.5 3.6-2.5 6.5 0 1.6.9 2.5 2.5 2.5v9"/></svg></span>
-          <div><h3>Restaurants &amp; commerces</h3><p>Débouchage de cuisines professionnelles, entretien des bacs à graisse et des sanitaires. Interventions possibles en dehors des heures d'ouverture.</p></div>
-        </li>
-        <li class="reveal">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3M3 18h18M21 18v-5a2 2 0 0 0-2-2h-6M3 21v-3M21 21v-3"/></svg></span>
-          <div><h3>Hôtels &amp; résidences</h3><p>Interventions discrètes et rapides dans les chambres et les parties communes, sans gêne pour votre clientèle. Disponibilité 7j/7.</p></div>
-        </li>
-        <li class="reveal">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9v6M21 9v6M6 7v10M18 7v10M6 12h12"/></svg></span>
-          <div><h3>Bureaux &amp; salles de sport</h3><p>Sanitaires, vestiaires et douches très fréquentés&nbsp;: entretien préventif, détartrage et dépannage en dehors de vos horaires d'affluence.</p></div>
-        </li>
-      </ul>
-      <aside class="pros-carte reveal" aria-labelledby="t-contrat">
-        <span class="etiquette">Contrat d'entretien</span>
-        <h3 id="t-contrat">Un plombier attitré pour votre structure.</h3>
-        <ul>
-          <li>Un interlocuteur unique, joignable directement</li>
-          <li>Interventions planifiées en dehors de vos horaires si nécessaire</li>
-          <li>Devis et factures détaillés au nom de votre structure</li>
-          <li>Rapport d'intervention pour vos assurances</li>
-          <li>Entretien préventif adapté à vos besoins</li>
-        </ul>
-        <a class="btn btn-cuivre" href="#devis" data-devis-profil="Professionnel">Demander un devis professionnel</a>
-        <a class="btn btn-ligne" href="tel:+33628360328"><svg><use href="#i-tel"/></svg>06 28 36 03 28</a>
-      </aside>
+    <div class="pros-corps">
+      <dl class="pros-tableau reveal">
+        <div><dt>Syndics et copropriétés</dt><dd>Colonnes montantes, parties communes, recherche de fuite entre deux lots. Rapport transmis au conseil syndical et aux assureurs.</dd></div>
+        <div><dt>Agences et gestionnaires</dt><dd>Dépannages chez vos locataires, remises en état entre deux locations et devis à transmettre aux propriétaires.</dd></div>
+        <div><dt>Restaurants et commerces</dt><dd>Cuisines professionnelles, bacs à graisse et sanitaires ouverts au public, avec des interventions possibles avant l'ouverture ou après la fermeture.</dd></div>
+        <div><dt>Hôtels et résidences</dt><dd>Interventions dans les chambres et les parties communes, organisées pour ne pas perturber l'activité de l'établissement.</dd></div>
+      </dl>
+      <div class="pros-contrat reveal">
+        <div>
+          <h3 id="t-contrat">Contrat d'entretien</h3>
+          <p>Pour les besoins réguliers, nous proposons un contrat d'entretien établi selon votre parc&nbsp;: visites préventives planifiées, interlocuteur unique et intervention prioritaire en cas de panne.</p>
+        </div>
+        <div class="pros-actions">
+          <a class="btn btn-cuivre" href="#devis" data-devis-profil="Professionnel">Demander un devis professionnel</a>
+          <a class="btn btn-ligne" href="tel:+33628360328"><svg><use href="#i-tel"/></svg>06 28 36 03 28</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
