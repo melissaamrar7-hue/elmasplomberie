@@ -874,6 +874,7 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
 
     <form class="devis-form reveal" id="form-devis" action="https://formspree.io/f/xyezzdlq" method="POST" novalidate>
       <input type="hidden" name="_subject" value="Nouvelle demande de devis — Elmas Plomberie">
+      <input type="hidden" name="_next" value="https://www.elmas-plomberie.fr/#devis">
 
       <div class="progression" aria-hidden="true">
         <div class="progression-haut"><div class="tuyau-form"><i id="progression-niveau"></i></div><span class="progression-pct" id="progression-pct">0 %</span></div>
@@ -960,7 +961,7 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
         <button type="submit" class="btn btn-cuivre">Envoyer ma demande</button>
         <small>Vos informations servent uniquement à traiter votre demande. <a href="#confidentialite">En savoir plus</a></small>
       </div>
-      <p class="envoi-erreur" id="envoi-erreur" role="alert" hidden>L'envoi n'a pas abouti. Merci de réessayer ou de nous appeler au <a href="tel:+33628360328" data-role="phone-text">06 28 36 03 28</a>.</p>
+      <p class="envoi-erreur" id="envoi-erreur" role="alert" hidden>L'envoi n'a pas abouti. Merci de réessayer ou de nous appeler au <a href="tel:+33628360328" data-role="phone-text">06 28 36 03 28</a>. <span id="envoi-detail" style="display:block;margin-top:6px;font-size:.82rem;opacity:.85"></span></p>
 
       <div class="confirmation" role="status" aria-live="polite">
         <svg class="conf-anim" viewBox="0 0 110 110" aria-hidden="true"><circle class="rond" cx="55" cy="70" r="32"/><path class="coche" d="M41 70 l10 10 l19 -20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="g" d="M55 8 S40 28 40 38 a15 15 0 0 0 30 0 C70 28 55 8 55 8z" fill="#C2672F"/></svg>
@@ -1202,14 +1203,30 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
       erreur.hidden = true;
       bouton.disabled = true;
       bouton.textContent = 'Envoi en cours…';
+      var detail = document.getElementById('envoi-detail');
+      if (detail) detail.textContent = '';
+      // Envoi classique (page Formspree) : utilisé si l'envoi en arrière-plan est refusé,
+      // par exemple quand Formspree demande une vérification anti-robot.
+      function envoiClassique(){ HTMLFormElement.prototype.submit.call(form); }
       fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
         .then(function(r){
-          if (!r.ok) throw new Error('refus');
-          document.getElementById('conf-nom').textContent = form.nom.value.trim().split(' ')[0];
-          form.classList.add('envoye');
-          form.scrollIntoView({behavior: reduit ? 'auto' : 'smooth', block: 'center'});
+          return r.json().catch(function(){ return {}; }).then(function(data){
+            if (r.ok){
+              document.getElementById('conf-nom').textContent = form.nom.value.trim().split(' ')[0];
+              form.classList.add('envoye');
+              form.scrollIntoView({behavior: reduit ? 'auto' : 'smooth', block: 'center'});
+              return;
+            }
+            var msg = (data.errors || []).map(function(e){ return e.message; }).join(' ') || data.error || ('code ' + r.status);
+            if (/captcha|recaptcha|robot/i.test(msg) || r.status === 403){ envoiClassique(); return; }
+            if (detail) detail.textContent = 'Détail : ' + msg;
+            erreur.hidden = false;
+          });
         })
-        .catch(function(){ erreur.hidden = false; })
+        .catch(function(){
+          // Connexion impossible en arrière-plan : on tente l'envoi classique.
+          try { envoiClassique(); } catch (e) { erreur.hidden = false; }
+        })
         .finally(function(){ bouton.disabled = false; bouton.textContent = 'Envoyer ma demande'; });
     });
   }
