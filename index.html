@@ -212,7 +212,8 @@ p{margin:0}
 .ticket-sep::before{left:-34px;clip-path:inset(0 0 0 50%)}
 .ticket-sep::after{right:-34px;clip-path:inset(0 50% 0 0)}
 .ticket ul{list-style:none;margin:0;padding:26px 30px 30px;display:grid;gap:12px;align-content:start;flex:1}
-.ticket li{display:flex;gap:10px;font-size:.95rem}
+.ticket li{display:flex;gap:10px;font-size:.95rem;white-space:nowrap}
+@media (min-width:981px) and (max-width:1240px){.ticket ul{padding-left:24px;padding-right:20px}.ticket li{font-size:clamp(.78rem,1.05vw,.95rem);gap:8px}}
 .ticket li::before{content:"✓";color:var(--cuivre);font-weight:700;flex:none}
 .ticket .btn{margin:0 30px 30px}
 .ticket.vedette{background:var(--encre);color:var(--papier);translate:0 -14px;box-shadow:0 30px 60px rgba(19,32,47,.22)}
