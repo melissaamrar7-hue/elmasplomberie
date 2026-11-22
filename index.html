@@ -177,14 +177,14 @@ p{margin:0}
 /* Services : liste éditoriale */
 .liste{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--ligne)}
 .liste li{border-top:1px solid var(--ligne)}
-.liste a{display:grid;grid-template-columns:72px 1.1fr 1.4fr 56px;gap:24px;align-items:center;padding:30px 20px;text-decoration:none;transition:background .35s,color .35s,padding .35s}
+.liste a{display:grid;grid-template-columns:minmax(220px,1fr) 1.7fr;gap:12px 40px;align-items:baseline;padding:28px 0;text-decoration:none}
 .liste .num{font-size:.9rem;font-weight:600;color:var(--cuivre)}
 .liste h3{font-size:clamp(1.5rem,2.6vw,2.25rem);letter-spacing:-.03em}
-.liste p{color:var(--encre-2);font-size:.98rem;transition:color .35s}
+.liste p{color:var(--encre-2);font-size:1rem;max-width:40em}
+.liste h3{transition:color .2s}
+.liste a:hover h3{color:var(--cuivre)}
 .liste .fleche{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ligne);display:grid;place-items:center;justify-self:end;transition:background .35s,border-color .35s,color .35s,transform .35s}
 .liste .fleche svg{width:20px;height:20px}
-.liste a:hover{background:var(--encre);color:var(--papier);padding-left:34px}
-.liste a:hover p{color:rgba(242,237,228,.7)}
 .liste a:hover .fleche{background:var(--cuivre);border-color:var(--cuivre);color:#fff;transform:rotate(-45deg)}
 
 /* Méthode */
@@ -433,10 +433,7 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
 }
 @media (max-width:640px){
   .bandeau-haut .masquer{display:none}
-  .liste a{grid-template-columns:36px 1fr 44px;gap:8px 14px;padding:24px 4px}
-  .liste p{grid-column:2/4;grid-row:2}
-  .liste .fleche{width:42px;height:42px;grid-column:3;grid-row:1}
-  .liste a:hover{padding-left:12px}
+  .liste a{grid-template-columns:1fr;gap:8px;padding:22px 0}
   .galerie{grid-template-columns:1fr}
   .galerie .g1{grid-row:auto;min-height:0;aspect-ratio:4/5}
   .macaron{width:118px;height:118px;left:-6px;bottom:24px}
@@ -549,17 +546,17 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
     <div class="tete reveal">
       <div>
         <span class="etiquette">Nos services</span>
-        <h2 id="t-services">Ce qu'on fait,<br>et bien.</h2>
+        <h2 id="t-services">Nos services</h2>
       </div>
-      <p>De la fuite du dimanche soir à la salle de bain refaite à neuf, chaque chantier est traité avec le même soin. Pas de sous-traitance&nbsp;: c'est l'artisan qui vient.</p>
+      <p>On intervient chez les particuliers comme chez les pros, partout en Île-de-France. C'est nous qui venons sur chaque chantier, on ne sous-traite pas.</p>
     </div>
     <ol class="liste">
-      <li><a href="#contact"><span class="num">01</span><h3>Dépannage &amp; urgences</h3><p>Fuite, dégât des eaux, canalisation bouchée&nbsp;: on intervient vite pour limiter les dégâts et réparer durablement.</p><span class="fleche"><svg><use href="#i-fleche"/></svg></span></a></li>
-      <li><a href="#contact"><span class="num">02</span><h3>Recherche de fuite</h3><p>Localisation précise des fuites visibles ou cachées, avec un minimum de casse. Rapport fourni pour votre assurance.</p><span class="fleche"><svg><use href="#i-fleche"/></svg></span></a></li>
-      <li><a href="#contact"><span class="num">03</span><h3>Débouchage</h3><p>Évier, douche, WC ou colonne&nbsp;: débouchage, curage et entretien préventif des canalisations.</p><span class="fleche"><svg><use href="#i-fleche"/></svg></span></a></li>
-      <li><a href="#contact"><span class="num">04</span><h3>Chauffe-eau</h3><p>Réparation, détartrage et remplacement de chauffe-eau électriques ou thermodynamiques.</p><span class="fleche"><svg><use href="#i-fleche"/></svg></span></a></li>
-      <li><a href="#contact"><span class="num">05</span><h3>Salle de bain &amp; cuisine</h3><p>Rénovation complète&nbsp;: plomberie, douche à l'italienne, vasque, évier, raccordements et finitions.</p><span class="fleche"><svg><use href="#i-fleche"/></svg></span></a></li>
-      <li><a href="#contact"><span class="num">06</span><h3>WC &amp; sanitaires</h3><p>Pose, remplacement et réparation de WC, lavabos, robinetterie et mécanismes de chasse.</p><span class="fleche"><svg><use href="#i-fleche"/></svg></span></a></li>
+      <li><a href="#contact"><h3>Dépannage &amp; urgences</h3><p>Une fuite, un dégât des eaux, un tuyau qui a lâché ? Appelez-nous, on se déplace rapidement, y compris le week-end.</p></a></li>
+      <li><a href="#contact"><h3>Recherche de fuite</h3><p>Tache au plafond, compteur qui tourne tout seul, facture d'eau qui grimpe… On trouve d'où ça vient en cassant le moins possible, et on vous fait un rapport pour l'assurance.</p></a></li>
+      <li><a href="#contact"><h3>Débouchage</h3><p>Évier, douche, WC ou colonne d'immeuble. On débouche, et on vous explique ce qui a causé le bouchon pour éviter que ça recommence.</p></a></li>
+      <li><a href="#contact"><h3>Chauffe-eau</h3><p>Plus d'eau chaude, ballon qui fuit ou qui fait du bruit. On le répare quand c'est possible, sinon on le remplace par un modèle électrique ou thermodynamique.</p></a></li>
+      <li><a href="#contact"><h3>Salle de bain &amp; cuisine</h3><p>Douche à l'italienne, meuble vasque, évier, lave-vaisselle. On refait toute la plomberie avant la pose, pour que ce qui est caché derrière les murs soit aussi propre que le reste.</p></a></li>
+      <li><a href="#contact"><h3>WC &amp; sanitaires</h3><p>Chasse d'eau qui coule sans arrêt, robinet qui goutte, WC à changer ou à suspendre. Ce sont souvent des petites interventions, qu'on règle dans la journée.</p></a></li>
     </ol>
   </div>
 </section>
