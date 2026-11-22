@@ -337,8 +337,29 @@ p{margin:0}
 .confirmation{display:none;text-align:center;padding:36px 10px}
 .devis-form.envoye > :not(.confirmation){display:none}
 .devis-form.envoye .confirmation{display:block}
-.rond-ok{width:74px;height:74px;border-radius:50%;background:var(--cuivre);color:#fff;display:grid;place-items:center;margin:0 auto 22px}
-.rond-ok svg{width:34px;height:34px}
+.conf-anim{display:block;width:110px;height:110px;margin:0 auto 14px;overflow:visible}
+.conf-anim .g{transform-origin:55px 55px;opacity:0}
+.conf-anim .rond{fill:var(--vert,#2E9E5B);transform-origin:55px 70px;transform:scale(1)}
+.conf-anim .coche{stroke-dasharray:60;stroke-dashoffset:0}
+.devis-form.envoye .conf-anim .g{animation:conf-tombe .7s cubic-bezier(.5,0,.7,.4) both}
+.devis-form.envoye .conf-anim .rond{animation:conf-pop .45s .65s cubic-bezier(.3,1.6,.5,1) both}
+.devis-form.envoye .conf-anim .coche{animation:conf-coche .4s 1s ease-out both}
+.devis-form.envoye .confirmation h3,.devis-form.envoye .confirmation p{animation:conf-apparait .4s 1.15s both}
+@keyframes conf-tombe{0%{transform:translateY(-40px);opacity:1}85%{transform:translateY(15px) scale(1,.9);opacity:1}100%{transform:translateY(18px) scale(1.4,.4);opacity:0}}
+@keyframes conf-pop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes conf-coche{from{stroke-dashoffset:60}to{stroke-dashoffset:0}}
+@keyframes conf-apparait{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* Progression du formulaire */
+.progression{margin-bottom:26px}
+.progression-haut{display:flex;align-items:center;gap:12px}
+.tuyau-form{position:relative;flex:1;height:12px;border-radius:6px;background:linear-gradient(180deg,#d8cbbb,#efe4d6 50%,#cdbfae);box-shadow:inset 0 0 0 1px rgba(19,32,47,.12);overflow:hidden}
+.tuyau-form i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(180deg,#d98a55,var(--cuivre) 50%,#9c4a1b);border-radius:6px;transition:width .5s cubic-bezier(.3,.7,.2,1)}
+.progression-pct{font-weight:700;font-size:.9rem;font-variant-numeric:tabular-nums;min-width:3.2em;text-align:right}
+.progression-etapes{display:flex;justify-content:space-between;gap:8px;margin-top:8px;font-size:.76rem;color:var(--encre-2)}
+.progression-etapes span{transition:color .3s}
+.progression-etapes span.fait{color:#2E9E5B;font-weight:600}
+.progression-etapes span.fait::before{content:"✓ "}
+@media (max-width:420px){.progression-etapes{font-size:.7rem}}
 .confirmation h3{font-size:2rem;font-weight:800;margin-bottom:12px}
 .confirmation p{color:var(--encre-2);max-width:26em;margin:0 auto 8px}
 .confirmation a{color:var(--encre);font-weight:700}
@@ -854,6 +875,11 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
     <form class="devis-form reveal" id="form-devis" action="https://formspree.io/f/xyezzdlq" method="POST" novalidate>
       <input type="hidden" name="_subject" value="Nouvelle demande de devis — Elmas Plomberie">
 
+      <div class="progression" aria-hidden="true">
+        <div class="progression-haut"><div class="tuyau-form"><i id="progression-niveau"></i></div><span class="progression-pct" id="progression-pct">0 %</span></div>
+        <div class="progression-etapes"><span data-etape="type">Besoin</span><span data-etape="nom">Nom</span><span data-etape="tel">Téléphone</span><span data-etape="email">Email</span><span data-etape="cp">Code postal</span></div>
+      </div>
+
       <div class="groupe">
         <span class="label" id="l-profil">Vous êtes</span>
         <div class="choix" role="radiogroup" aria-labelledby="l-profil">
@@ -937,7 +963,7 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
       <p class="envoi-erreur" id="envoi-erreur" role="alert" hidden>L'envoi n'a pas abouti. Merci de réessayer ou de nous appeler au <a href="tel:+33628360328" data-role="phone-text">06 28 36 03 28</a>.</p>
 
       <div class="confirmation" role="status" aria-live="polite">
-        <span class="rond-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
+        <svg class="conf-anim" viewBox="0 0 110 110" aria-hidden="true"><circle class="rond" cx="55" cy="70" r="32"/><path class="coche" d="M41 70 l10 10 l19 -20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="g" d="M55 8 S40 28 40 38 a15 15 0 0 0 30 0 C70 28 55 8 55 8z" fill="#C2672F"/></svg>
         <h3>Demande envoyée&nbsp;!</h3>
         <p>Merci <span id="conf-nom"></span>. Nous vous recontactons dans les plus brefs délais.</p>
         <p>En cas d'urgence, appelez le <a href="tel:+33628360328" data-role="phone-text">06 28 36 03 28</a>.</p>
@@ -1143,6 +1169,18 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
       el.addEventListener('input', function(){ if (bloc(id).classList.contains('invalide')) valider(id); });
     });
     form.querySelectorAll('input[name="type"]').forEach(function(r){ r.addEventListener('change', function(){ valider('type'); }); });
+
+    // Progression du formulaire
+    var niveau = document.getElementById('progression-niveau'), pctEl = document.getElementById('progression-pct');
+    function majProgression(){
+      var ids = ['type','nom','tel','email','cp'], ok = 0;
+      ids.forEach(function(id){ var bon = regles[id](); if (bon) ok++; var et = form.querySelector('[data-etape="' + id + '"]'); if (et) et.classList.toggle('fait', bon); });
+      var pct = Math.round(ok / ids.length * 100);
+      if (niveau) niveau.style.width = pct + '%';
+      if (pctEl) pctEl.textContent = pct + ' %';
+    }
+    form.addEventListener('input', majProgression); form.addEventListener('change', majProgression);
+    majProgression();
 
     var erreur = document.getElementById('envoi-erreur');
     var bouton = form.querySelector('button[type="submit"]');
