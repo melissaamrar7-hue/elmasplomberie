@@ -232,17 +232,29 @@ p{margin:0}
 /* Professionnels */
 .pros{background:var(--encre);color:var(--papier)}
 .pros .tete p{color:rgba(242,237,228,.7)}
+@media (min-width:981px){.pros .tete{grid-template-columns:1.2fr .8fr}}
+.pros .tete h2{font-size:clamp(2.3rem,4.6vw,4rem)}
 .pros-cartes{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.pros-carte{position:relative;display:flex;flex-direction:column;background:#1B2A3B;border:1px solid rgba(242,237,228,.1);border-radius:14px;padding:30px 26px 26px;transition:border-color .3s,transform .3s}
-.pros-carte::before{content:"";position:absolute;left:26px;top:0;width:40px;height:3px;background:var(--cuivre);border-radius:0 0 3px 3px}
-.pros-carte:hover{border-color:rgba(232,180,140,.45);transform:translateY(-4px)}
-.pros-carte h3{font-size:1.3rem;letter-spacing:-.02em;line-height:1.2;margin-bottom:12px}
-.pros-carte p{color:rgba(242,237,228,.72);font-size:.95rem;flex:1}
-.pros-carte ul{list-style:none;margin:22px 0 0;padding:18px 0 0;border-top:1px solid rgba(242,237,228,.12);display:grid;gap:8px}
-.pros-carte li{font-size:.86rem;color:var(--cuivre-clair);display:flex;gap:8px}
-.pros-carte li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--cuivre);margin-top:.55em;flex:none}
+.pros-carte{position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,#1E2E40,#18273A);border:1px solid rgba(242,237,228,.1);border-radius:16px;padding:26px 24px 22px;transition:border-color .3s,transform .3s,box-shadow .3s}
+.pros-carte:hover{border-color:rgba(232,180,140,.5);transform:translateY(-4px);box-shadow:0 22px 44px rgba(0,0,0,.28)}
+.pc-haut{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.pc-ico{width:48px;height:48px;border-radius:12px;background:rgba(194,103,47,.14);border:1px solid rgba(232,180,140,.3);display:grid;place-items:center;color:var(--cuivre-clair)}
+.pc-ico svg{width:24px;height:24px}
+.pc-type{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,237,228,.5)}
+.pros-carte h3{font-size:1.3rem;letter-spacing:-.02em;line-height:1.2;margin-bottom:10px}
+.pros-carte p{color:rgba(242,237,228,.72);font-size:.94rem;flex:1}
+.pros-carte ul{list-style:none;margin:20px 0 0;padding:16px 0 0;border-top:1px solid rgba(242,237,228,.12);display:grid;gap:7px}
+.pros-carte li{font-size:.86rem;color:rgba(242,237,228,.88);display:flex;gap:9px}
+.pros-carte li::before{content:"✓";color:var(--cuivre-clair);font-weight:700;flex:none}
+.pc-lien{margin-top:20px;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-weight:600;font-size:.9rem;color:var(--cuivre-clair);text-decoration:none}
+.pc-lien svg{width:16px;height:16px;transition:transform .25s}
+.pc-lien:hover{color:#fff}
+.pc-lien:hover svg{transform:translateX(4px)}
 @media (max-width:1080px){.pros-cartes{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.pros-cartes{grid-template-columns:1fr}}
+.pros-contrat .etiquette{margin-bottom:12px}
+.pc-points{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pc-points li{font-size:.86rem;font-weight:500;padding:7px 13px;border-radius:999px;background:#fff;border:1px solid var(--ligne)}
 .pros-contrat{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:1.3fr auto;gap:28px 48px;align-items:center;background:var(--papier);color:var(--encre);border-radius:14px;padding:clamp(26px,3.5vw,40px)}
 .pros-contrat h3{font-size:clamp(1.4rem,2.2vw,1.8rem);font-weight:800;letter-spacing:-.03em;margin-bottom:10px}
 .pros-contrat p{color:var(--encre-2);max-width:40em}
@@ -689,30 +701,40 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
     <div class="pros-corps">
       <div class="pros-cartes">
         <article class="pros-carte reveal">
+          <div class="pc-haut"><span class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v17M15 9h3a1 1 0 0 1 1 1v11M3 21h18M8.5 7h3M8.5 11h3M8.5 15h3M11 21v-3"/></svg></span><span class="pc-type">Copropriété</span></div>
           <h3>Syndics et copropriétés</h3>
           <p>Entretien et dépannage des parties communes, avec un rapport transmis au conseil syndical et aux assureurs.</p>
           <ul><li>Colonnes montantes</li><li>Fuites entre lots</li><li>Parties communes</li></ul>
+          <a class="pc-lien" href="#devis" data-devis-profil="Professionnel" data-devis-structure="Syndic / copropriété">Demander un devis <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
         </article>
         <article class="pros-carte reveal">
+          <div class="pc-haut"><span class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 8.7-8.7M16 7l2.5 2.5M14 9l2 2"/></svg></span><span class="pc-type">Gestion locative</span></div>
           <h3>Agences et gestionnaires</h3>
           <p>Interventions chez vos locataires et remises en état entre deux locations, avec des devis prêts à transmettre aux propriétaires.</p>
           <ul><li>Dépannages locatifs</li><li>Remises en état</li><li>Devis rapides</li></ul>
+          <a class="pc-lien" href="#devis" data-devis-profil="Professionnel" data-devis-structure="Agence / gestionnaire">Demander un devis <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
         </article>
         <article class="pros-carte reveal">
+          <div class="pc-haut"><span class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v7a2 2 0 0 0 4 0V3M9 12v9M17 21V3c-2 1.5-3 4-3 7 0 1.7.9 2.5 3 2.5"/></svg></span><span class="pc-type">Commerce</span></div>
           <h3>Restaurants et commerces</h3>
           <p>Interventions possibles avant l'ouverture ou après la fermeture, pour ne pas interrompre votre activité.</p>
           <ul><li>Cuisines professionnelles</li><li>Bacs à graisse</li><li>Sanitaires clients</li></ul>
+          <a class="pc-lien" href="#devis" data-devis-profil="Professionnel" data-devis-structure="Restaurant / commerce">Demander un devis <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
         </article>
         <article class="pros-carte reveal">
+          <div class="pc-haut"><span class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19V6M3 15h18v4M21 15v-3a3 3 0 0 0-3-3h-7v6M7 12.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg></span><span class="pc-type">Hôtellerie</span></div>
           <h3>Hôtels et résidences</h3>
           <p>Interventions organisées pour ne pas perturber vos clients, dans les chambres comme dans les parties communes.</p>
           <ul><li>Chambres</li><li>Parties communes</li><li>Disponibilité 7j/7</li></ul>
+          <a class="pc-lien" href="#devis" data-devis-profil="Professionnel" data-devis-structure="Hôtel / résidence">Demander un devis <svg aria-hidden="true"><use href="#i-fleche"/></svg></a>
         </article>
       </div>
       <div class="pros-contrat reveal">
         <div>
+          <span class="etiquette">Besoins réguliers</span>
           <h3 id="t-contrat">Contrat d'entretien</h3>
-          <p>Pour les besoins réguliers, nous proposons un contrat d'entretien établi selon votre parc&nbsp;: visites préventives planifiées, interlocuteur unique et intervention prioritaire en cas de panne.</p>
+          <p>Un contrat établi selon votre parc, pour anticiper les pannes plutôt que les subir.</p>
+          <ul class="pc-points"><li>Visites préventives planifiées</li><li>Interlocuteur unique</li><li>Intervention prioritaire en cas de panne</li></ul>
         </div>
         <div class="pros-actions">
           <a class="btn btn-cuivre" href="#devis" data-devis-profil="Professionnel">Demander un devis professionnel</a>
@@ -1041,11 +1063,12 @@ body.mode-edition [contenteditable="true"]:focus{outline:2px solid var(--cuivre)
       var r = form.querySelector('input[name="' + nom + '"][value="' + valeur.replace(/"/g, '\\"') + '"]');
       if (r){ r.checked = true; r.dispatchEvent(new Event('change')); }
     }
-    document.querySelectorAll('[data-devis-forfait],[data-devis-type],[data-devis-profil]').forEach(function(lien){
+    document.querySelectorAll('[data-devis-forfait],[data-devis-type],[data-devis-profil],[data-devis-structure]').forEach(function(lien){
       lien.addEventListener('click', function(){
         if (lien.dataset.devisForfait) form.forfait.value = lien.dataset.devisForfait;
         if (lien.dataset.devisType) cocher('type', lien.dataset.devisType);
         if (lien.dataset.devisProfil) cocher('profil', lien.dataset.devisProfil);
+        if (lien.dataset.devisStructure && form.structure) form.structure.value = lien.dataset.devisStructure;
       });
     });
 
